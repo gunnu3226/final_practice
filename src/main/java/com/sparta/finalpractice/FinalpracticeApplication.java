@@ -10,5 +10,4 @@ public class FinalpracticeApplication {
     public static void main(String[] args) {
         SpringApplication.run(FinalpracticeApplication.class, args);
     }
-
 }

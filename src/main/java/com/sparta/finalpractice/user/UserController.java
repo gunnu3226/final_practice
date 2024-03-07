@@ -1,9 +1,8 @@
-package com.sparta.finalpractice.controller;
+package com.sparta.finalpractice.user;
 
-import com.sparta.finalpractice.dto.CommonResponse;
-import com.sparta.finalpractice.dto.user.SignupRequestDto;
-import com.sparta.finalpractice.dto.user.UserResponseDto;
-import com.sparta.finalpractice.service.UserService;
+import com.sparta.finalpractice.CommonResponse;
+import com.sparta.finalpractice.user.dto.SignupRequestDto;
+import com.sparta.finalpractice.user.dto.UserResponseDto;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

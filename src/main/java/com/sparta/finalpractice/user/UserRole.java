@@ -1,9 +1,10 @@
-package com.sparta.finalpractice.entity;
+package com.sparta.finalpractice.user;
 
 public enum UserRole {
 
     USER("ROLE_USER"),
-    ADMIN("ROLE_ADMIN");
+    ADMIN("ROLE_ADMIN"),
+    OWNER("ROLE_OWNER");
 
     private final String authority;
 

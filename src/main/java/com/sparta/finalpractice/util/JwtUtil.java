@@ -1,6 +1,6 @@
 package com.sparta.finalpractice.util;
 
-import com.sparta.finalpractice.entity.UserRole;
+import com.sparta.finalpractice.user.UserRole;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -53,7 +53,7 @@ public class JwtUtil {
     }
 
     // 토큰 생성
-    public String createAccessToken(Long userId, String username, UserRole role) {
+    public String createToken(Long userId, String username, UserRole role) {
         Date date = new Date();
 
         return BEARER_PREFIX +
@@ -77,13 +77,11 @@ public class JwtUtil {
     }
 
     // 토큰 검증
-    public int validateToken(String token) {
+    public boolean validateToken(String token) {
         try {
             Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
-            return 0;
         } catch (ExpiredJwtException e) {
             logger.error("Expired JWT token, 만료된 JWT token 입니다.");
-            return 1;
         } catch (SecurityException | MalformedJwtException | SignatureException e) {
             logger.error("Invalid JWT signature, 유효하지 않는 JWT 서명 입니다.");
         } catch (UnsupportedJwtException e) {
@@ -91,7 +89,7 @@ public class JwtUtil {
         } catch (IllegalArgumentException e) {
             logger.error("JWT claims is empty, 잘못된 JWT 토큰 입니다.");
         }
-        return 2;
+        return true;
     }
 
     // 토큰에서 사용자 정보 가져오기

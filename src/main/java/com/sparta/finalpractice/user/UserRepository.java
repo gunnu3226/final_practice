@@ -1,6 +1,6 @@
-package com.sparta.finalpractice.repository;
+package com.sparta.finalpractice.user;
 
-import com.sparta.finalpractice.entity.User;
+import com.sparta.finalpractice.user.User;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 

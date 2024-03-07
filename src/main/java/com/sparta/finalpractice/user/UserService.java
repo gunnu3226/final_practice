@@ -1,11 +1,8 @@
-package com.sparta.finalpractice.service;
+package com.sparta.finalpractice.user;
 
-import com.sparta.finalpractice.dto.user.SignupRequestDto;
-import com.sparta.finalpractice.dto.user.UserResponseDto;
-import com.sparta.finalpractice.entity.User;
-import com.sparta.finalpractice.entity.UserRole;
-import com.sparta.finalpractice.exception.EmailExistException;
-import com.sparta.finalpractice.repository.UserRepository;
+import com.sparta.finalpractice.user.dto.SignupRequestDto;
+import com.sparta.finalpractice.user.dto.UserResponseDto;
+import com.sparta.finalpractice.exception.user.EmailExistException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,6 +19,9 @@ public class UserService {
 
     @Value("${admin.token}")
     private String ADMIN_TOKEN;
+
+    @Value("")
+    private String OWNER_TOKEN;
 
     public UserResponseDto signup(SignupRequestDto requestDto) {
         checkDuplicationEmail(requestDto);

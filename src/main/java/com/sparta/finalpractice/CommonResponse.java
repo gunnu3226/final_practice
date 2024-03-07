@@ -1,4 +1,4 @@
-package com.sparta.finalpractice.dto;
+package com.sparta.finalpractice;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

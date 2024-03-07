@@ -1,4 +1,4 @@
-package com.sparta.finalpractice.exception;
+package com.sparta.finalpractice.exception.user;
 
 public class EmailExistException extends RuntimeException {
 

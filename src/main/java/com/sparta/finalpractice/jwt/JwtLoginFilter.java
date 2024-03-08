@@ -1,4 +1,4 @@
-package com.sparta.finalpractice.filter;
+package com.sparta.finalpractice.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sparta.finalpractice.CommonResponse;
@@ -6,7 +6,6 @@ import com.sparta.finalpractice.security.UserDetailsImpl;
 import com.sparta.finalpractice.user.UserRole;
 import com.sparta.finalpractice.user.dto.LoginRequestDto;
 import com.sparta.finalpractice.user.dto.UserResponseDto;
-import com.sparta.finalpractice.util.JwtUtil;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -21,10 +20,10 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Slf4j(topic = "로그인 및 JWT 생성")
-public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
+public class JwtLoginFilter extends UsernamePasswordAuthenticationFilter {
     private final JwtUtil jwtUtil;
 
-    public JwtAuthenticationFilter(JwtUtil jwtUtil) {
+    public JwtLoginFilter(JwtUtil jwtUtil) {
         this.jwtUtil = jwtUtil;
         setFilterProcessesUrl("/api/users/login");
     }
@@ -54,13 +53,12 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
         log.info("로그인 성공 및 JWT 생성");
-        Long userId = ((UserDetailsImpl) authResult.getPrincipal()).getUserId();
-        String username = ((UserDetailsImpl) authResult.getPrincipal()).getUsername();
-        UserRole role = ((UserDetailsImpl) authResult.getPrincipal()).getUser().getRole();
+        Long userId = ((UserDetailsImpl) authResult.getPrincipal()).getId();
+        String username = ((UserDetailsImpl) authResult.getPrincipal()).getEmail();
+        UserRole role = ((UserDetailsImpl) authResult.getPrincipal()).getRole();
 
-        String jsonResponse = new ObjectMapper().writeValueAsString(CommonResponse.builder()
-            .data(new UserResponseDto(userId))
-            .build());
+        String jsonResponse = new ObjectMapper().writeValueAsString(
+            new CommonResponse<>(new UserResponseDto(userId, role)));
 
         String token = jwtUtil.createToken(userId, username, role);
         response.addHeader(JwtUtil.AUTHORIZATION_HEADER, token);

@@ -22,14 +22,12 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping
-    public ResponseEntity<CommonResponse> signup(
+    public ResponseEntity<CommonResponse<UserResponseDto>> signup(
             @RequestBody @Valid SignupRequestDto requestDto
         ){
         UserResponseDto responseDto = userService.signup(requestDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(
-            CommonResponse.builder()
-                .data(responseDto)
-                .build()
+            new CommonResponse(requestDto)
         );
     }
 }

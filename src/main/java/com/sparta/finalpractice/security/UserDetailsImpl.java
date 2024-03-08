@@ -4,46 +4,53 @@ import com.sparta.finalpractice.user.User;
 import com.sparta.finalpractice.user.UserRole;
 import java.util.ArrayList;
 import java.util.Collection;
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+@Getter
 public class UserDetailsImpl implements UserDetails {
 
-    private final User user;
+    private  Long id;
+    private String email;
+    private String password;
+    private  UserRole role;
+
+//    private User user;
+
+    public UserDetailsImpl(Long id, UserRole role) {
+        this.id = id;
+        this.role = role;
+    }
 
     public UserDetailsImpl(User user) {
-        this.user = user;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public Long getUserId() {
-        return user.getId();
-    }
-
-    @Override
-    public String getPassword() {
-        return user.getPassword();
-    }
-
-    @Override
-    public String getUsername() {
-        return user.getEmail();
+        this.id = user.getId();
+        this.email = user.getEmail();
+        this.password = user.getPassword();
+        this.role = user.getRole();
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        UserRole role = user.getRole();
-        String authority = role.getAuthority();
-
-        SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(authority);
         Collection<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(simpleGrantedAuthority);
+        if (role != null) {
+            String authority = role.getAuthority();
+            SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(authority);
+            authorities.add(simpleGrantedAuthority);
+        }
 
         return authorities;
+    }
+
+    @Override
+    public String getPassword() {
+        return this.password;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.email;
     }
 
     @Override

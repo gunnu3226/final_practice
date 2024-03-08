@@ -1,23 +1,26 @@
-package com.sparta.finalpractice.util;
+package com.sparta.finalpractice.jwt;
 
+import com.sparta.finalpractice.security.UserDetailsImpl;
 import com.sparta.finalpractice.user.UserRole;
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.SignatureException;
-import io.jsonwebtoken.UnsupportedJwtException;
 import io.jsonwebtoken.security.Keys;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
 import java.security.Key;
 import java.util.Base64;
+import java.util.Collection;
 import java.util.Date;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
@@ -53,12 +56,12 @@ public class JwtUtil {
     }
 
     // 토큰 생성
-    public String createToken(Long userId, String username, UserRole role) {
+    public String createToken(Long userId, String email, UserRole role) {
         Date date = new Date();
 
         return BEARER_PREFIX +
             Jwts.builder()
-                .setSubject(username) // 사용자 식별자값(ID)
+                .setSubject(email) // 사용자 식별자값(ID)
                 .claim(USER_ID, userId)
                 .claim(AUTHORIZATION_KEY, role)
                 .setExpiration(new Date(date.getTime() + ACCESS_TOKEN_TIME)) // 만료 시간
@@ -67,34 +70,10 @@ public class JwtUtil {
                 .compact();
     }
 
-    // JWT 토큰 substring
-    public String substringToken(String tokenValue) {
-        if (StringUtils.hasText(tokenValue) && tokenValue.startsWith(BEARER_PREFIX)) {
-            return tokenValue.substring(7);
-        }
-        logger.error("Not Found Token");
-        throw new NullPointerException("Not Found Token");
-    }
-
-    // 토큰 검증
-    public boolean validateToken(String token) {
-        try {
-            Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
-        } catch (ExpiredJwtException e) {
-            logger.error("Expired JWT token, 만료된 JWT token 입니다.");
-        } catch (SecurityException | MalformedJwtException | SignatureException e) {
-            logger.error("Invalid JWT signature, 유효하지 않는 JWT 서명 입니다.");
-        } catch (UnsupportedJwtException e) {
-            logger.error("Unsupported JWT token, 지원되지 않는 JWT 토큰 입니다.");
-        } catch (IllegalArgumentException e) {
-            logger.error("JWT claims is empty, 잘못된 JWT 토큰 입니다.");
-        }
-        return true;
-    }
-
     // 토큰에서 사용자 정보 가져오기
     public Claims getUserInfoFromToken(String token) {
-        return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody();
+            return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token)
+                .getBody();
     }
 
     public String getJwtFromHeader(HttpServletRequest request) {
@@ -105,11 +84,17 @@ public class JwtUtil {
         return null;
     }
 
-    public Claims getUserInfoFromExpiredToken(String token) {
-        try {
-            return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody();
-        } catch (ExpiredJwtException e) {
-            return e.getClaims();
-        }
+    private UserDetails getUserDetailsFromToken(Claims info) {
+        Long userId = ((Number) info.get(USER_ID)).longValue();
+        UserRole userRole = UserRole.valueOf((String) info.get(AUTHORIZATION_KEY));
+        return new UserDetailsImpl(userId, userRole);
+    }
+
+    public Authentication createAuthentication(String token) {
+        Claims info = getUserInfoFromToken(token);
+        UserDetails userDetails = getUserDetailsFromToken(info);
+        Collection<? extends GrantedAuthority> authorities = userDetails.getAuthorities();
+        return new UsernamePasswordAuthenticationToken(
+            userDetails, null, authorities);
     }
 }

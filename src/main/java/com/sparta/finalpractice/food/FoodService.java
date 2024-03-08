@@ -21,6 +21,7 @@ public class FoodService {
     @Transactional
     public FoodResponse createFood(Long storeId, FoodRequest foodrequest, User user) {
         Store store = storeService.findStoreById(storeId);
+
         if(store.getOwner().getId().equals(user.getId())) {
             Food savedFood = foodRepository.save(new Food(foodrequest, store));
             return new FoodResponse(savedFood);

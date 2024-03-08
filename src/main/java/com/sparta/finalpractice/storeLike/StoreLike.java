@@ -2,6 +2,7 @@ package com.sparta.finalpractice.storeLike;
 
 import com.sparta.finalpractice.store.Store;
 import com.sparta.finalpractice.user.User;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -32,8 +33,24 @@ public class StoreLike {
     @JoinColumn(name = "store_id")
     private Store store;
 
+    @Getter
+    @Column(columnDefinition = "boolean default true")
+    private boolean vaild;
+
     public StoreLike(User user, Store store) {
         this.user = user;
         this.store = store;
+    }
+
+    public boolean getVaild() {
+        return this.vaild;
+    }
+
+    public void doLike() {
+        this.vaild = true;
+    }
+
+    public void disLike() {
+        this.vaild = false;
     }
 }

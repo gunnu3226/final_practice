@@ -27,22 +27,22 @@ public class StoreLikeController {
         @PathVariable("storeId") Long storeId,
         @AuthenticationPrincipal UserDetailsImpl userDetails
     ) {
-        StoreLikeResponse response = storeLikeService.doStoreLike(
-            userDetails.getUser(), storeId);
-        return ResponseEntity.status(HttpStatus.CREATED).body(
-            new CommonResponse<>(response));
-    }
-
-    @DeleteMapping
-    @Secured("ROLE_USER")
-    public ResponseEntity<CommonResponse<StoreLikeResponse>> cancelStoreLike(
-        @PathVariable("storeId") Long storeId,
-        @AuthenticationPrincipal UserDetailsImpl userDetails
-    ) {
-        StoreLikeResponse response = storeLikeService.cancelStoreLike(
+        storeLikeService.storeLikeRedis(
             userDetails.getUser(), storeId);
         return ResponseEntity.status(HttpStatus.OK).body(
-            new CommonResponse<>(response));
+            new CommonResponse<>());
     }
+
+//    @DeleteMapping
+//    @Secured("ROLE_USER")
+//    public ResponseEntity<CommonResponse<StoreLikeResponse>> cancelStoreLike(
+//        @PathVariable("storeId") Long storeId,
+//        @AuthenticationPrincipal UserDetailsImpl userDetails
+//    ) {
+//        StoreLikeResponse response = storeLikeService.cancelStoreLike(
+//            userDetails.getUser(), storeId);
+//        return ResponseEntity.status(HttpStatus.OK).body(
+//            new CommonResponse<>(response));
+//    }
 }
 

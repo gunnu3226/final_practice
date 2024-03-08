@@ -1,10 +1,8 @@
 package com.sparta.finalpractice.exception;
 
+import com.sparta.finalpractice.exception.storeLike.AlReadyStoreLikeException;
 import com.sparta.finalpractice.exception.user.EmailExistException;
-import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.MalformedJwtException;
-import io.jsonwebtoken.SignatureException;
-import io.jsonwebtoken.UnsupportedJwtException;
+import java.util.NoSuchElementException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +27,22 @@ public class ControllerAdvice {
         log.error("접근 권한 불일치 에러");
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(
             new ErrorResponse("접근 권한 불일치 에러")
+        );
+    }
+
+    @ExceptionHandler(NoSuchElementException.class)
+    public ResponseEntity<ErrorResponse> noSuchElementException(NoSuchElementException e) {
+        log.error("데이터 없는 에러");
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(
+            new ErrorResponse(e.getMessage())
+        );
+    }
+
+    @ExceptionHandler(AlReadyStoreLikeException.class)
+    public ResponseEntity<ErrorResponse> alReadyStoreLikeException(AlReadyStoreLikeException e) {
+        log.error("이미 존재하는 찜 가게");
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(
+            new ErrorResponse(e.getMessage())
         );
     }
 }

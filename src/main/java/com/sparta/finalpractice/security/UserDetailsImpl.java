@@ -12,30 +12,24 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Getter
 public class UserDetailsImpl implements UserDetails {
 
-    private  Long id;
-    private String email;
-    private String password;
-    private  UserRole role;
-
-//    private User user;
+    private User user;
 
     public UserDetailsImpl(Long id, UserRole role) {
-        this.id = id;
-        this.role = role;
+        this.user = User.builder()
+            .id(id)
+            .role(role)
+            .build();
     }
 
     public UserDetailsImpl(User user) {
-        this.id = user.getId();
-        this.email = user.getEmail();
-        this.password = user.getPassword();
-        this.role = user.getRole();
+        this.user = user;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Collection<GrantedAuthority> authorities = new ArrayList<>();
-        if (role != null) {
-            String authority = role.getAuthority();
+        if (user.getRole() != null) {
+            String authority = user.getRole().getAuthority();
             SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(authority);
             authorities.add(simpleGrantedAuthority);
         }
@@ -43,14 +37,18 @@ public class UserDetailsImpl implements UserDetails {
         return authorities;
     }
 
+    public User getUser() {
+        return this.user;
+    }
+
     @Override
     public String getPassword() {
-        return this.password;
+        return user.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return this.email;
+        return user.getEmail();
     }
 
     @Override

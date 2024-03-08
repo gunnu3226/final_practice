@@ -5,15 +5,12 @@ import com.sparta.finalpractice.security.UserDetailsImpl;
 import com.sparta.finalpractice.store.dto.StoreRegisterRequestDto;
 import com.sparta.finalpractice.store.dto.StoreResponseDto;
 import jakarta.validation.Valid;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,7 +30,7 @@ public class StoreController {
         @AuthenticationPrincipal UserDetailsImpl userDetails,
         @RequestBody @Valid StoreRegisterRequestDto requestDto
     ) {
-        StoreResponseDto responseDto = storeService.registerStore(userDetails.getId(),
+        StoreResponseDto responseDto = storeService.registerStore(userDetails.getUser(),
             requestDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(
             new CommonResponse<>(responseDto)
@@ -41,7 +38,7 @@ public class StoreController {
     }
 
 //    @GetMapping("{id}")
- //    public ResponseEntity<StoreResponseDto> getStoreDetail() {
+    //    public ResponseEntity<StoreResponseDto> getStoreDetail() {
 //
 //    }
 

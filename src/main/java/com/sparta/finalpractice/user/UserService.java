@@ -1,8 +1,8 @@
 package com.sparta.finalpractice.user;
 
+import com.sparta.finalpractice.exception.user.EmailExistException;
 import com.sparta.finalpractice.user.dto.SignupRequestDto;
 import com.sparta.finalpractice.user.dto.UserResponseDto;
-import com.sparta.finalpractice.exception.user.EmailExistException;
 import java.util.NoSuchElementException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -42,8 +42,8 @@ public class UserService {
     }
 
     private UserRole validateUserRole(String role) {
-        if(role != null) {
-            if(role.equals(ADMIN_TOKEN)) {
+        if (role != null) {
+            if (role.equals(ADMIN_TOKEN)) {
                 return UserRole.ADMIN;
             } else if (role.equals(OWNER_TOKEN)) {
                 return UserRole.OWNER;
@@ -52,9 +52,9 @@ public class UserService {
         return UserRole.USER;
     }
 
-    public User findOneUser(Long id) {
+    public User findUserById(Long id) {
         return userRepository.findById(id).orElseThrow(
-            () -> new NoSuchElementException()
+            () -> new NoSuchElementException("ID : " + id + "인 User는 존재하지 않습니다.")
         );
     }
 }

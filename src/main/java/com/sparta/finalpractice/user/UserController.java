@@ -23,8 +23,8 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<CommonResponse<UserResponseDto>> signup(
-            @RequestBody @Valid SignupRequestDto requestDto
-        ){
+        @RequestBody @Valid SignupRequestDto requestDto
+    ) {
         UserResponseDto responseDto = userService.signup(requestDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(
             new CommonResponse(requestDto)

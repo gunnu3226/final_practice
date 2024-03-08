@@ -31,11 +31,12 @@ public class JwtFilter extends OncePerRequestFilter {
     }
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
+        FilterChain filterChain) throws ServletException, IOException {
 
         String token = jwtUtil.getJwtFromHeader(request);
 
-        if(StringUtils.hasText(token)) {
+        if (StringUtils.hasText(token)) {
             try {
                 Authentication authentication = jwtUtil.createAuthentication(token);
                 SecurityContext context = SecurityContextHolder.createEmptyContext();

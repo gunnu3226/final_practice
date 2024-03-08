@@ -1,8 +1,8 @@
 package com.sparta.finalpractice.config;
 
 import com.sparta.finalpractice.jwt.JwtAuthenticationEntryPoint;
-import com.sparta.finalpractice.jwt.JwtLoginFilter;
 import com.sparta.finalpractice.jwt.JwtFilter;
+import com.sparta.finalpractice.jwt.JwtLoginFilter;
 import com.sparta.finalpractice.jwt.JwtUtil;
 import com.sparta.finalpractice.security.UserDetailsServiceImpl;
 import lombok.extern.slf4j.Slf4j;
@@ -41,7 +41,8 @@ public class WebSecurityConfig {
     }
 
     @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration)
+        throws Exception {
         return configuration.getAuthenticationManager();
     }
 
@@ -69,7 +70,8 @@ public class WebSecurityConfig {
 
         http.authorizeHttpRequests((authorizeHttpRequests) ->
             authorizeHttpRequests
-                .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll() // resources 접근 허용 설정
+                .requestMatchers(PathRequest.toStaticResources().atCommonLocations())
+                .permitAll() // resources 접근 허용 설정
                 .requestMatchers("/api/users", "/api/users/login").permitAll()
                 .anyRequest().authenticated() // 그 외 모든 요청 인증처리
         );
@@ -78,10 +80,10 @@ public class WebSecurityConfig {
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 
         http.exceptionHandling((exceptionHandling) ->
-            exceptionHandling
-                .authenticationEntryPoint(jwtAuthenticationEntryPoint) // Authentication Failure 핸들러 설정
+                exceptionHandling
+                    .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+            // Authentication Failure 핸들러 설정
         );
-
 
         return http.build();
     }

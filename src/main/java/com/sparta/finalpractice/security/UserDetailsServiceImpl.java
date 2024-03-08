@@ -1,10 +1,8 @@
 package com.sparta.finalpractice.security;
 
-import com.sparta.finalpractice.security.UserDetailsImpl;
 import com.sparta.finalpractice.user.User;
 import com.sparta.finalpractice.user.UserRepository;
 import com.sparta.finalpractice.user.UserRole;
-import java.util.Optional;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -19,7 +17,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         this.userRepository = userRepository;
     }
 
-    public UserDetails loadUserDetails(Long userId, UserRole role) throws UsernameNotFoundException {
+    public UserDetails loadUserDetails(Long userId, UserRole role)
+        throws UsernameNotFoundException {
         return new UserDetailsImpl(userId, role);
     }
 

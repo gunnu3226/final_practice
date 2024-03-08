@@ -21,6 +21,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Slf4j(topic = "로그인 및 JWT 생성")
 public class JwtLoginFilter extends UsernamePasswordAuthenticationFilter {
+
     private final JwtUtil jwtUtil;
 
     public JwtLoginFilter(JwtUtil jwtUtil) {
@@ -51,11 +52,13 @@ public class JwtLoginFilter extends UsernamePasswordAuthenticationFilter {
     }
 
     @Override
-    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
+    protected void successfulAuthentication(HttpServletRequest request,
+        HttpServletResponse response, FilterChain chain, Authentication authResult)
+        throws IOException, ServletException {
         log.info("로그인 성공 및 JWT 생성");
-        Long userId = ((UserDetailsImpl) authResult.getPrincipal()).getId();
-        String username = ((UserDetailsImpl) authResult.getPrincipal()).getEmail();
-        UserRole role = ((UserDetailsImpl) authResult.getPrincipal()).getRole();
+        Long userId = ((UserDetailsImpl) authResult.getPrincipal()).getUser().getId();
+        String username = ((UserDetailsImpl) authResult.getPrincipal()).getUser().getEmail();
+        UserRole role = ((UserDetailsImpl) authResult.getPrincipal()).getUser().getRole();
 
         String jsonResponse = new ObjectMapper().writeValueAsString(
             new CommonResponse<>(new UserResponseDto(userId, role)));
@@ -69,7 +72,9 @@ public class JwtLoginFilter extends UsernamePasswordAuthenticationFilter {
     }
 
     @Override
-    protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
+    protected void unsuccessfulAuthentication(HttpServletRequest request,
+        HttpServletResponse response, AuthenticationException failed)
+        throws IOException, ServletException {
         log.info("로그인 실패");
         response.setStatus(HttpStatus.UNAUTHORIZED.value());
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);

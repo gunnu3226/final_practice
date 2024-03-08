@@ -3,7 +3,6 @@ package com.sparta.finalpractice.user.dto;
 import com.sparta.finalpractice.user.User;
 import com.sparta.finalpractice.user.UserRole;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 @Getter
 public class UserResponseDto {

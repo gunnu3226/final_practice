@@ -15,11 +15,11 @@ import org.springframework.stereotype.Component;
 public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
     @Override
-    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException)
+    public void commence(HttpServletRequest request, HttpServletResponse response,
+        AuthenticationException authException)
         throws IOException {
         String jsonResponse = new ObjectMapper().writeValueAsString(
-            ErrorResponse.<Void>builder()
-                .message("유효하지 않은 토큰 입니다.").build());
+            new ErrorResponse("유효하지 않은 토큰 입니다."));
         log.error("유효하지 않은 토큰 접근");
         // 유효한 자격증명을 제공하지 않고 접근하려 할때 401
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);

@@ -13,10 +13,12 @@ public class StoreLikeResponse {
     private Long storeLikeId;
     private Long userId;
     private Long storeId;
+    private String storeName;
 
     public StoreLikeResponse(StoreLike storeLike) {
         this.storeLikeId = storeLike.getId();
         this.userId = storeLike.getUser().getId();
         this.storeId = storeLike.getStore().getId();
+        this.storeName = storeLike.getStore().getName();
     }
 }

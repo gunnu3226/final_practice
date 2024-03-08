@@ -17,7 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class StoreService {
 
     private final StoreRepository storeRepository;
-    private final UserService userService;
 
     @Transactional
     public StoreResponseDto registerStore(User owner, StoreRegisterRequestDto requestDto) {

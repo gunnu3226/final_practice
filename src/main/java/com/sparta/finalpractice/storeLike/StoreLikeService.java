@@ -1,6 +1,7 @@
 package com.sparta.finalpractice.storeLike;
 
 import com.sparta.finalpractice.exception.storeLike.AlReadyStoreLikeException;
+import com.sparta.finalpractice.store.Store;
 import com.sparta.finalpractice.store.StoreService;
 import com.sparta.finalpractice.storeLike.dto.StoreLikeResponse;
 import com.sparta.finalpractice.user.User;
@@ -22,8 +23,10 @@ public class StoreLikeService {
         if (storeLikeRepository.existsByUserIdAndStoreId(user.getId(), storeId)) {
             throw new AlReadyStoreLikeException("이미 찜한 가게 입니다.");
         }
+        Store store = storeService.findStoreById(storeId);
+        store.addStoreLikeCount();
         StoreLike savedStoreLike = storeLikeRepository.save(
-            new StoreLike(user, storeService.findStoreById(storeId)));
+            new StoreLike(user, store));
         return new StoreLikeResponse(savedStoreLike);
     }
 
@@ -33,6 +36,7 @@ public class StoreLikeService {
             user.getId(), storeId).orElseThrow(
             () -> new NoSuchElementException("유저가 찜하지 않은 가게 입니다.")
         );
+        findStoreLike.getStore().subtractLikeCount();
         storeLikeRepository.delete(findStoreLike);
         return new StoreLikeResponse(findStoreLike);
     }

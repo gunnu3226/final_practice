@@ -1,9 +1,9 @@
 package com.sparta.finalpractice.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sparta.finalpractice.CommonResponse;
+import com.sparta.finalpractice.global.dto.CommonResponse;
 import com.sparta.finalpractice.security.UserDetailsImpl;
-import com.sparta.finalpractice.user.UserRole;
+import com.sparta.finalpractice.user.entity.UserRole;
 import com.sparta.finalpractice.user.dto.LoginRequestDto;
 import com.sparta.finalpractice.user.dto.UserResponseDto;
 import jakarta.servlet.FilterChain;

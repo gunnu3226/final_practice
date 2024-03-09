@@ -1,7 +1,7 @@
 package com.sparta.finalpractice.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sparta.finalpractice.exception.ErrorResponse;
+import com.sparta.finalpractice.global.dto.ErrorResponse;
 import com.sparta.finalpractice.security.UserDetailsServiceImpl;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;

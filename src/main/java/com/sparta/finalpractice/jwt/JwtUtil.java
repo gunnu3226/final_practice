@@ -1,7 +1,7 @@
 package com.sparta.finalpractice.jwt;
 
 import com.sparta.finalpractice.security.UserDetailsImpl;
-import com.sparta.finalpractice.user.UserRole;
+import com.sparta.finalpractice.user.entity.UserRole;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -36,7 +36,7 @@ public class JwtUtil {
     // Token 식별자
     public static final String BEARER_PREFIX = "Bearer ";
     // 토큰 만료시간
-    private final long ACCESS_TOKEN_TIME = 60 * 60 * 1000L; // 60분
+    private final long ACCESS_TOKEN_TIME = 120 * 60 * 1000L; // 60분
     private final long REFRESH_TOKEN_TIME = 30 * 24 * 60 * 60 * 1000L; // 30일
 
     @Value("${jwt.secret.key}") // Base64 Encode 한 SecretKey

@@ -1,7 +1,7 @@
 package com.sparta.finalpractice.user.dto;
 
-import com.sparta.finalpractice.user.User;
-import com.sparta.finalpractice.user.UserRole;
+import com.sparta.finalpractice.user.entity.User;
+import com.sparta.finalpractice.user.entity.UserRole;
 import lombok.Getter;
 
 @Getter

@@ -1,8 +1,8 @@
 package com.sparta.finalpractice.security;
 
-import com.sparta.finalpractice.user.User;
-import com.sparta.finalpractice.user.UserRepository;
-import com.sparta.finalpractice.user.UserRole;
+import com.sparta.finalpractice.user.entity.User;
+import com.sparta.finalpractice.user.repository.UserRepository;
+import com.sparta.finalpractice.user.entity.UserRole;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

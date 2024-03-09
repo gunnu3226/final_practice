@@ -2,6 +2,7 @@ package com.sparta.finalpractice.exception;
 
 import com.sparta.finalpractice.exception.storeLike.AlReadyStoreLikeException;
 import com.sparta.finalpractice.exception.user.EmailExistException;
+import com.sparta.finalpractice.global.dto.ErrorResponse;
 import java.util.NoSuchElementException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

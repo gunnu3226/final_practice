@@ -1,7 +1,7 @@
 package com.sparta.finalpractice.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sparta.finalpractice.exception.ErrorResponse;
+import com.sparta.finalpractice.global.dto.ErrorResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;

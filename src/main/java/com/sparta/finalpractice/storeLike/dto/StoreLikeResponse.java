@@ -1,6 +1,6 @@
 package com.sparta.finalpractice.storeLike.dto;
 
-import com.sparta.finalpractice.storeLike.StoreLike;
+import com.sparta.finalpractice.storeLike.entity.StoreLike;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

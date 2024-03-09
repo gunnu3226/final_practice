@@ -1,18 +1,28 @@
 package com.sparta.finalpractice.food.dto;
 
-import com.sparta.finalpractice.food.Food;
+import com.sparta.finalpractice.food.entity.Food;
 import lombok.Getter;
 
 @Getter
 public class FoodResponse {
 
-    private Long foodId;
-    private Long StoreId;
-    private String foodName;
+    private Long id;
+
+    private String name;
+
+    private String description;
+
+    private Long price;
 
     public FoodResponse(Food food) {
-        this.foodId = food.getId();
-        this.StoreId = food.getStore().getId();
-        this.foodName = food.getName();
+        this.id = food.getId();
+        this.name = food.getName();
+        this.description = food.getDescription();
+        this.price = food.getPrice();
+    }
+
+    public FoodResponse(Long foodId, String name) {
+        this.id = foodId;
+        this.name = name;
     }
 }

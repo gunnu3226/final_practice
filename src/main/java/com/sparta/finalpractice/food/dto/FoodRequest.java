@@ -1,12 +1,17 @@
 package com.sparta.finalpractice.food.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 
 @Getter
 public class FoodRequest {
 
+    @NotBlank
     private String name;
+
     private String description;
-    private int price;
+
+    @NotBlank
+    private Long price;
 
 }

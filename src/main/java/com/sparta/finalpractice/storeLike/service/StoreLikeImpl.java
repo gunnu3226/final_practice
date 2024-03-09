@@ -8,8 +8,10 @@ import com.sparta.finalpractice.user.entity.User;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Service
 @RequiredArgsConstructor
 public class StoreLikeImpl implements StoreLikeService{
 
@@ -40,14 +42,12 @@ public class StoreLikeImpl implements StoreLikeService{
 //    }
 
     @Override
-    @Transactional
     public void saveStoreLikeDB(User user, Long storeId) {
         Store store = storeService.findStoreById(storeId);
         storeLikeRepository.save(new StoreLike(user, store));
     }
 
     @Override
-    @Transactional
     public void storeLikeRedis(User user, Long storeId) {
         String hashKey = generateHashKey(user.getId(), storeId);
 

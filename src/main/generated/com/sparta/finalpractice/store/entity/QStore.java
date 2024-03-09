@@ -1,13 +1,10 @@
-package com.sparta.finalpractice.store;
+package com.sparta.finalpractice.store.entity;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
 import com.querydsl.core.types.dsl.*;
 
 import com.querydsl.core.types.PathMetadata;
-import com.sparta.finalpractice.food.entity.Food;
-import com.sparta.finalpractice.store.entity.Store;
-import com.sparta.finalpractice.store.entity.StoreCategory;
 import javax.annotation.processing.Generated;
 import com.querydsl.core.types.Path;
 import com.querydsl.core.types.dsl.PathInits;
@@ -19,13 +16,13 @@ import com.querydsl.core.types.dsl.PathInits;
 @Generated("com.querydsl.codegen.DefaultEntitySerializer")
 public class QStore extends EntityPathBase<Store> {
 
-    private static final long serialVersionUID = 1498322065L;
+    private static final long serialVersionUID = 1038134566L;
 
     private static final PathInits INITS = PathInits.DIRECT2;
 
     public static final QStore store = new QStore("store");
 
-    public final com.sparta.finalpractice.QTimeStamp _super = new com.sparta.finalpractice.QTimeStamp(this);
+    public final com.sparta.finalpractice.global.entity.QTimeStamp _super = new com.sparta.finalpractice.global.entity.QTimeStamp(this);
 
     public final EnumPath<StoreCategory> category = createEnum("category", StoreCategory.class);
 
@@ -35,7 +32,7 @@ public class QStore extends EntityPathBase<Store> {
     //inherited
     public final DateTimePath<java.time.LocalDateTime> deletedAt = _super.deletedAt;
 
-    public final ListPath<Food, com.sparta.finalpractice.food.QFood> foods = this.<Food, com.sparta.finalpractice.food.QFood>createList("foods", Food.class, com.sparta.finalpractice.food.QFood.class, PathInits.DIRECT2);
+    public final ListPath<com.sparta.finalpractice.food.entity.Food, com.sparta.finalpractice.food.entity.QFood> foods = this.<com.sparta.finalpractice.food.entity.Food, com.sparta.finalpractice.food.entity.QFood>createList("foods", com.sparta.finalpractice.food.entity.Food.class, com.sparta.finalpractice.food.entity.QFood.class, PathInits.DIRECT2);
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
@@ -43,7 +40,7 @@ public class QStore extends EntityPathBase<Store> {
 
     public final StringPath name = createString("name");
 
-    public final com.sparta.finalpractice.user.QUser owner;
+    public final com.sparta.finalpractice.user.entity.QUser owner;
 
     public final NumberPath<Integer> storeLike = createNumber("storeLike", Integer.class);
 
@@ -68,7 +65,7 @@ public class QStore extends EntityPathBase<Store> {
 
     public QStore(Class<? extends Store> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.owner = inits.isInitialized("owner") ? new com.sparta.finalpractice.user.QUser(forProperty("owner")) : null;
+        this.owner = inits.isInitialized("owner") ? new com.sparta.finalpractice.user.entity.QUser(forProperty("owner")) : null;
     }
 
 }

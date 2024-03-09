@@ -1,11 +1,10 @@
-package com.sparta.finalpractice.storeLike;
+package com.sparta.finalpractice.storeLike.entity;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
 import com.querydsl.core.types.dsl.*;
 
 import com.querydsl.core.types.PathMetadata;
-import com.sparta.finalpractice.storeLike.entity.StoreLike;
 import javax.annotation.processing.Generated;
 import com.querydsl.core.types.Path;
 import com.querydsl.core.types.dsl.PathInits;
@@ -17,7 +16,7 @@ import com.querydsl.core.types.dsl.PathInits;
 @Generated("com.querydsl.codegen.DefaultEntitySerializer")
 public class QStoreLike extends EntityPathBase<StoreLike> {
 
-    private static final long serialVersionUID = 286647231L;
+    private static final long serialVersionUID = -1418600954L;
 
     private static final PathInits INITS = PathInits.DIRECT2;
 
@@ -25,9 +24,9 @@ public class QStoreLike extends EntityPathBase<StoreLike> {
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
-    public final com.sparta.finalpractice.store.QStore store;
+    public final com.sparta.finalpractice.store.entity.QStore store;
 
-    public final com.sparta.finalpractice.user.QUser user;
+    public final com.sparta.finalpractice.user.entity.QUser user;
 
     public final BooleanPath vaild = createBoolean("vaild");
 
@@ -49,8 +48,8 @@ public class QStoreLike extends EntityPathBase<StoreLike> {
 
     public QStoreLike(Class<? extends StoreLike> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.store = inits.isInitialized("store") ? new com.sparta.finalpractice.store.QStore(forProperty("store"), inits.get("store")) : null;
-        this.user = inits.isInitialized("user") ? new com.sparta.finalpractice.user.QUser(forProperty("user")) : null;
+        this.store = inits.isInitialized("store") ? new com.sparta.finalpractice.store.entity.QStore(forProperty("store"), inits.get("store")) : null;
+        this.user = inits.isInitialized("user") ? new com.sparta.finalpractice.user.entity.QUser(forProperty("user")) : null;
     }
 
 }

@@ -1,12 +1,10 @@
-package com.sparta.finalpractice.user;
+package com.sparta.finalpractice.user.entity;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
 import com.querydsl.core.types.dsl.*;
 
 import com.querydsl.core.types.PathMetadata;
-import com.sparta.finalpractice.user.entity.User;
-import com.sparta.finalpractice.user.entity.UserRole;
 import javax.annotation.processing.Generated;
 import com.querydsl.core.types.Path;
 
@@ -17,11 +15,11 @@ import com.querydsl.core.types.Path;
 @Generated("com.querydsl.codegen.DefaultEntitySerializer")
 public class QUser extends EntityPathBase<User> {
 
-    private static final long serialVersionUID = -99808629L;
+    private static final long serialVersionUID = -1681339274L;
 
     public static final QUser user = new QUser("user");
 
-    public final com.sparta.finalpractice.QTimeStamp _super = new com.sparta.finalpractice.QTimeStamp(this);
+    public final com.sparta.finalpractice.global.entity.QTimeStamp _super = new com.sparta.finalpractice.global.entity.QTimeStamp(this);
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> createAt = _super.createAt;

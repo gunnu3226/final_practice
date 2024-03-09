@@ -1,16 +1,13 @@
 package com.sparta.finalpractice.store.service;
 
-import com.sparta.finalpractice.store.dto.StoreListResponse;
-import com.sparta.finalpractice.store.dto.StoreRegisterRequest;
 import com.sparta.finalpractice.store.dto.StoreResponse;
+import com.sparta.finalpractice.store.dto.StoreRegisterRequest;
 import com.sparta.finalpractice.store.entity.Store;
 import com.sparta.finalpractice.user.entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Service
 @Transactional(readOnly = true)
 public interface StoreService {
 
@@ -28,16 +25,23 @@ public interface StoreService {
     /**
      * JpaRepository 사용하여 가게정보 page로 반환
      * @param pageable 페이징 정보
-     * @return 페이지<store> 가게의 메뉴정보 포함
+     * @return 가게의 정보 페이지로 반환
      */
-    public Page<StoreListResponse> selectTotalStoreList(Pageable pageable);
+    public Page<StoreResponse> selectTotalStoreList(Pageable pageable);
 
     /**
      * queryDsl 사용하여 가게정보 page로 반환
      * @param pageable 페이징 정보
-     * @return 페이지<store> 가게의 메뉴정보 포함
+     * @return 가게의 정보 페이지로 반환
      */
-    public Page<StoreListResponse> selectTotalStoreListQuery(Pageable pageable);
+    public Page<StoreResponse> selectTotalStoreListQuery(Pageable pageable);
+
+    /**
+     * 가게ID로 상세정보 조회
+     * @param storeId 가게 ID
+     * @return 가게 상세정보(음식 리스트 포함)
+     */
+    public StoreResponse selectOneStoreByIdQuery(Long storeId);
 
     public Store findStoreById(Long id);
 }

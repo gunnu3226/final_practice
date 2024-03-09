@@ -22,8 +22,7 @@ public class FoodReviewServiceImpl implements FoodReviewService {
 
     private final FoodReviewRepository foodReviewRepository;
     private final FoodService foodService;
-    
-    @Transactional
+
     @Override
     public FoodReviewResponse createFoodReview(Long foodId, FoodReviewRequest request,
         User user) {
@@ -34,7 +33,6 @@ public class FoodReviewServiceImpl implements FoodReviewService {
         return new FoodReviewResponse(savedFoodReview);
     }
 
-    @Transactional
     @Override
     public FoodReviewResponse updateFoodReview(Long FoodReviewId, FoodReviewRequest request,
         User user) {
@@ -44,7 +42,6 @@ public class FoodReviewServiceImpl implements FoodReviewService {
         return new FoodReviewResponse(foodReview);
     }
 
-    @Transactional
     @Override
     public FoodReviewDeleteResponse deleteFoodReview(Long FoodReviewId, User user) {
         FoodReview foodReview = findFoodReviewById(FoodReviewId);

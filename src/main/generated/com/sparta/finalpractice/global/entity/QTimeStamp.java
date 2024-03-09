@@ -1,11 +1,10 @@
-package com.sparta.finalpractice;
+package com.sparta.finalpractice.global.entity;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
 import com.querydsl.core.types.dsl.*;
 
 import com.querydsl.core.types.PathMetadata;
-import com.sparta.finalpractice.global.entity.TimeStamp;
 import javax.annotation.processing.Generated;
 import com.querydsl.core.types.Path;
 
@@ -16,7 +15,7 @@ import com.querydsl.core.types.Path;
 @Generated("com.querydsl.codegen.DefaultSupertypeSerializer")
 public class QTimeStamp extends EntityPathBase<TimeStamp> {
 
-    private static final long serialVersionUID = 1636372275L;
+    private static final long serialVersionUID = 1726569235L;
 
     public static final QTimeStamp timeStamp = new QTimeStamp("timeStamp");
 

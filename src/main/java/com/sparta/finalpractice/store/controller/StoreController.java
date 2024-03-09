@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -52,6 +53,16 @@ public class StoreController {
     @GetMapping("/query")
     public ResponseEntity<CommonResponse<Page>> selectTotalStoreListQuery(Pageable pageable) {
         Page response = storeService.selectTotalStoreListQuery(pageable);
+        return ResponseEntity.status(HttpStatus.OK).body(
+            new CommonResponse<>(response)
+        );
+    }
+
+    @GetMapping("/{storeId}")
+    public ResponseEntity<CommonResponse<StoreResponse>> selectTotalStoreListQuery(
+        @PathVariable("storeId") Long storeId
+    ) {
+        StoreResponse response = storeService.selectOneStoreByIdQuery(storeId);
         return ResponseEntity.status(HttpStatus.OK).body(
             new CommonResponse<>(response)
         );

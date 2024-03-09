@@ -8,13 +8,13 @@
 - 최대한 배운것을 모두 적용하는 프로젝트
 
 ### 스프링 심화 코드 개선 과제
-#### 1일차. Controller, Service 패키지 내 클래스 개선
+#### ~~1일차. Controller, Service 패키지 내 클래스 개선~~ ✅
   - 1. ~~Controller Advice 로 예외 공통화 처리하기~~
     - https://github.com/gunnu3226/final_practice/blob/main/src/main/java/com/sparta/finalpractice/exception/ControllerAdvice.java
   - 2. ~~Service 인터페이스와 구현체 분리하여 추상화 하기~~
     - https://github.com/gunnu3226/final_practice/tree/main/src/main/java/com/sparta/finalpractice/foodReview/service
 
-#### 2일차. CustomException 정의 및 SpringAOP 적용
+#### 2일차. CustomException 정의 및 SpringAOP 적용 
 - 1. ~~CustomException 정의~~
   - https://github.com/gunnu3226/final_practice/tree/main/src/main/java/com/sparta/finalpractice/exception
 - 2. Spring AOP 적용
@@ -23,7 +23,7 @@
 - QueryDSL 의 jpaQueryFactory 를 사용해서 검색기능을 만들어주세요!
 
 
-#### 4일차. Pageable 을 사용하여 페이징 및 정렬 기능 만들기
+#### ~~4일차. Pageable 을 사용하여 페이징 및 정렬 기능 만들기~~ ✅
 - ~~Pageable 을 사용해서 원하는 페이지 사이즈만큼만 조회 해주세요! (JpaRepository, QueryDSL 모두)~~
   - ~~Querydsl~~
     - https://github.com/gunnu3226/final_practice/tree/main/src/main/java/com/sparta/finalpractice/store/repository

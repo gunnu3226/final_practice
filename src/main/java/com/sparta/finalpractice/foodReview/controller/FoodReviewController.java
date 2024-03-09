@@ -1,5 +1,6 @@
-package com.sparta.finalpractice.foodReview;
+package com.sparta.finalpractice.foodReview.controller;
 
+import com.sparta.finalpractice.foodReview.service.FoodReviewService;
 import com.sparta.finalpractice.global.dto.CommonResponse;
 import com.sparta.finalpractice.foodReview.dto.FoodReviewDeleteResponse;
 import com.sparta.finalpractice.foodReview.dto.FoodReviewRequest;

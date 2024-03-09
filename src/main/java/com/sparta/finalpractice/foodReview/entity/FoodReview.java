@@ -1,4 +1,4 @@
-package com.sparta.finalpractice.foodReview;
+package com.sparta.finalpractice.foodReview.entity;
 
 import com.sparta.finalpractice.global.entity.TimeStamp;
 import com.sparta.finalpractice.food.entity.Food;

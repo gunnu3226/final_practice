@@ -1,6 +1,6 @@
 package com.sparta.finalpractice.foodReview.dto;
 
-import com.sparta.finalpractice.foodReview.FoodReview;
+import com.sparta.finalpractice.foodReview.entity.FoodReview;
 import java.time.LocalDateTime;
 import lombok.Getter;
 

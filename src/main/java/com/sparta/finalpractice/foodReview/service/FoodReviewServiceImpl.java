@@ -1,10 +1,13 @@
-package com.sparta.finalpractice.foodReview;
+package com.sparta.finalpractice.foodReview.service;
 
 import com.sparta.finalpractice.food.entity.Food;
 import com.sparta.finalpractice.food.service.FoodService;
 import com.sparta.finalpractice.foodReview.dto.FoodReviewDeleteResponse;
 import com.sparta.finalpractice.foodReview.dto.FoodReviewRequest;
 import com.sparta.finalpractice.foodReview.dto.FoodReviewResponse;
+import com.sparta.finalpractice.foodReview.entity.FoodReview;
+import com.sparta.finalpractice.foodReview.repository.FoodReviewRepository;
+import com.sparta.finalpractice.foodReview.service.FoodReviewService;
 import com.sparta.finalpractice.user.entity.User;
 import java.util.NoSuchElementException;
 import lombok.RequiredArgsConstructor;

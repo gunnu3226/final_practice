@@ -1,4 +1,4 @@
-package com.sparta.finalpractice.foodReview;
+package com.sparta.finalpractice.foodReview.service;
 
 import com.sparta.finalpractice.foodReview.dto.FoodReviewDeleteResponse;
 import com.sparta.finalpractice.foodReview.dto.FoodReviewRequest;

@@ -10,6 +10,11 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public interface UserService {
 
+    /**
+     * 회원가입
+     * @param requestDto 회원가입 정보
+     * @return 가입된 회원
+     */
     @Transactional
     public UserResponseDto signup(SignupRequestDto requestDto);
 

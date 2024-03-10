@@ -1,14 +1,17 @@
 package com.sparta.finalpractice.store.repository;
 
+import static com.querydsl.core.group.GroupBy.groupBy;
 import static com.sparta.finalpractice.food.entity.QFood.food;
 import static com.sparta.finalpractice.store.entity.QStore.*;
 
+import com.querydsl.core.group.Group;
 import com.querydsl.core.types.Expression;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.core.types.dsl.Wildcard;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.sparta.finalpractice.food.dto.FoodResponse;
+import com.sparta.finalpractice.food.entity.Food;
 import com.sparta.finalpractice.store.dto.StoreResponse;
 import com.sparta.finalpractice.store.entity.QStore;
 import com.sparta.finalpractice.store.entity.Store;
@@ -32,6 +35,24 @@ public class StoreRepositoryQueryImpl implements StoreRepositoryQuery {
     public StoreResponse searchOneStore(StoreSearchCond cond) {
         Store store = query(QStore.store, cond).fetch().get(0);
         return new StoreResponse(store);
+    }
+
+    @Override
+    public StoreResponse searchOneStoreFoodLimit(StoreSearchCond cond) {
+        List<Food> foodList = jpaQueryFactory.selectFrom(food)
+            .innerJoin(food.store, store).fetchJoin()
+            .where(store.id.eq(cond.getStoreId()))
+            .limit(2)
+            .fetch();
+        Store store  = foodList.get(0).getStore();
+
+        return new StoreResponse(
+                store.getId(),
+                store.getName(),
+                store.getIntroduce(),
+                foodList.stream()
+                    .map(FoodResponse::new)
+                    .collect(Collectors.toList()));
     }
 
     @Override

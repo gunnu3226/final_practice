@@ -8,6 +8,7 @@ import lombok.Data;
 @Builder
 public class StoreSearchCond {
 
+    private Long foodLimit;
     private Long storeId;
     private StoreCategory category;
 }

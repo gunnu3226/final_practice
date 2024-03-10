@@ -9,4 +9,6 @@ public interface StoreRepositoryQuery {
     Page<StoreResponse> search(Pageable pageable, StoreSearchCond cond);
 
     StoreResponse searchOneStore(StoreSearchCond cond);
+
+    StoreResponse searchOneStoreFoodLimit(StoreSearchCond cond);
 }

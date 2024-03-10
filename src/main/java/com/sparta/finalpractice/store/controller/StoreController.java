@@ -58,11 +58,21 @@ public class StoreController {
         );
     }
 
-    @GetMapping("/{storeId}")
+    @GetMapping("/v1/{storeId}")
     public ResponseEntity<CommonResponse<StoreResponse>> selectTotalStoreListQuery(
         @PathVariable("storeId") Long storeId
     ) {
         StoreResponse response = storeService.selectOneStoreByIdQuery(storeId);
+        return ResponseEntity.status(HttpStatus.OK).body(
+            new CommonResponse<>(response)
+        );
+    }
+
+    @GetMapping("/v2/{storeId}")
+    public ResponseEntity<CommonResponse<StoreResponse>> selectOneStoreByIdLimitFoodQuery(
+        @PathVariable("storeId") Long storeId
+    ) {
+        StoreResponse response = storeService.selectOneStoreByIdLimitFoodQuery(storeId);
         return ResponseEntity.status(HttpStatus.OK).body(
             new CommonResponse<>(response)
         );

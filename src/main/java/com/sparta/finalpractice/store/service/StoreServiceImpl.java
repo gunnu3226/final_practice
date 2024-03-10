@@ -29,13 +29,6 @@ public class StoreServiceImpl implements StoreService {
     }
 
     @Override
-    public Store findStoreById(Long id) {
-        return storeRepository.findById(id).orElseThrow(
-            () -> new NoSuchElementException("ID : " + id + "인 Store는 존재하지 않습니다.")
-        );
-    }
-
-    @Override
     public Page<StoreResponse> selectTotalStoreList(Pageable pageable) {
         Page<Store> page = storeRepository.findAll(pageable);
 
@@ -56,4 +49,17 @@ public class StoreServiceImpl implements StoreService {
                 .build());
     }
 
+    @Override
+    public StoreResponse selectOneStoreByIdLimitFoodQuery(Long storeId) {
+        return storeRepository.searchOneStoreFoodLimit(
+            StoreSearchCond.builder().storeId(storeId).build()
+        );
+    }
+
+    @Override
+    public Store findStoreById(Long id) {
+        return storeRepository.findById(id).orElseThrow(
+            () -> new NoSuchElementException("ID : " + id + "인 Store는 존재하지 않습니다.")
+        );
+    }
 }

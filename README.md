@@ -27,7 +27,28 @@
 - ~~Pageable 을 사용해서 원하는 페이지 사이즈만큼만 조회 해주세요! (JpaRepository, QueryDSL 모두)~~
   - ~~Querydsl~~
     - https://github.com/gunnu3226/final_practice/tree/main/src/main/java/com/sparta/finalpractice/store/repository
-  - ~~Data Jpa~~
+    - Store 전체 조회에서 사용해 보았는데 Store가 List<Food>를 들고있어 food까지 fetchjoin하게되면 데이터를 모두 애플리케이션 단으로 끌고와서 애플리케이션 메모리에서 페이징을 한다는 사실을 알게됨. 
+    따라서 이런 경우(컬렉션을 같이 조회하는 경우) 먼저 toOne관계만 페치조인하여 받아오고, toMany는 배치 사이즈를 설정하여 지연로딩하면 쿼리 2개로 해결.
+    - 단건 조회에서 1개의 스토어에 n개의 음식만 조회하도록 제한하고 싶으면 방향을 반대로하여 food에서 limit을 걸고 조회
+      ```java
+      public StoreResponse searchOneStoreFoodLimit(StoreSearchCond cond) {
+              List<Food> foodList = jpaQueryFactory.selectFrom(food)
+                  .innerJoin(food.store, store).fetchJoin()
+                  .where(store.id.eq(cond.getStoreId()))
+                  .limit(2)
+                  .fetch();
+              Store store  = foodList.get(0).getStore();
+      
+              return new StoreResponse(
+                      store.getId(),
+                      store.getName(),
+                      store.getIntroduce(),
+                      foodList.stream()
+                          .map(FoodResponse::new)
+                          .collect(Collectors.toList()));
+          }
+      ```
+  - ~~JpaRepository~~
     - https://github.com/gunnu3226/final_practice/blob/main/src/main/java/com/sparta/finalpractice/store/service/StoreServiceImpl.java
 #### 5일차. Controller 테스트 코드 작성하기
 - MockMvc 를 사용해서 Controller 테스트 코드를 작성해주세요!

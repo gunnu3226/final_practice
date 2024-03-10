@@ -43,5 +43,12 @@ public interface StoreService {
      */
     public StoreResponse selectOneStoreByIdQuery(Long storeId);
 
+    /**
+     * 가게ID로 상세정보 조회(메뉴 개수 제한)
+     * @param storeId
+     * @return
+     */
+    public StoreResponse selectOneStoreByIdLimitFoodQuery(Long storeId);
+
     public Store findStoreById(Long id);
 }

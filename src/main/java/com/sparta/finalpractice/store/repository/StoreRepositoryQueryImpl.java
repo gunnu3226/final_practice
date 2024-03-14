@@ -1,10 +1,8 @@
 package com.sparta.finalpractice.store.repository;
 
-import static com.querydsl.core.group.GroupBy.groupBy;
 import static com.sparta.finalpractice.food.entity.QFood.food;
-import static com.sparta.finalpractice.store.entity.QStore.*;
+import static com.sparta.finalpractice.store.entity.QStore.store;
 
-import com.querydsl.core.group.Group;
 import com.querydsl.core.types.Expression;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.core.types.dsl.Wildcard;

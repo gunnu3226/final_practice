@@ -37,16 +37,16 @@ class UserServiceTest implements UserTest {
     @Test
     void signup() {
         //given
-        SignupRequestDto requestDto = SIGNUP_REQUEST_DTO;
-        given(userRepository.save(any(User.class))).willReturn(OWNER_USER);
+        SignupRequestDto requestDto = TEST_SIGNUP_REQUEST_DTO;
+        given(userRepository.save(any(User.class))).willReturn(TEST_OWNER_USER);
         given(passwordEncoder.encode(requestDto.getPassword())).willReturn(ENCODED_PASSWORD);
 
         //when
         UserResponseDto response = userService.signup(requestDto);
 
         //then
-        assertThat(OWNER_USER_ID).isEqualTo(response.getUserId());
-        assertThat(ROLE_OWNER_STRING).isEqualTo(response.getUserRole());
+        assertThat(TEST_OWNER_USER_ID).isEqualTo(response.getUserId());
+        assertThat(TEST_ROLE_OWNER_STRING).isEqualTo(response.getUserRole());
     }
 
     @Nested
@@ -57,28 +57,28 @@ class UserServiceTest implements UserTest {
         @Test
         void findUserById_success() {
             //given
-            given(userRepository.findById(OWNER_USER_ID)).willReturn(
-                Optional.ofNullable(OWNER_USER));
+            given(userRepository.findById(TEST_OWNER_USER_ID)).willReturn(
+                Optional.ofNullable(TEST_OWNER_USER));
 
             //when
-            User findUser = userService.findUserById(OWNER_USER_ID);
+            User findUser = userService.findUserById(TEST_OWNER_USER_ID);
 
             //then
-            assertThat(OWNER_USER_ID).isEqualTo(findUser.getId());
-            assertThat(USER_EMAIL).isEqualTo(findUser.getEmail());
-            assertThat(USER_ENCODED_PASSWORD).isEqualTo(findUser.getPassword());
-            assertThat(USER_NICKNAME).isEqualTo(findUser.getNickname());
+            assertThat(TEST_OWNER_USER_ID).isEqualTo(findUser.getId());
+            assertThat(TEST_USER_EMAIL).isEqualTo(findUser.getEmail());
+            assertThat(TEST_USER_ENCODED_PASSWORD).isEqualTo(findUser.getPassword());
+            assertThat(TEST_USER_NICKNAME).isEqualTo(findUser.getNickname());
         }
 
         @DisplayName("조회실패_유저없음")
         @Test
         void findUserById_fail() {
             //given
-            given(userRepository.findById(ANOTHER_ID)).willThrow(NoSuchElementException.class);
+            given(userRepository.findById(TEST_ANOTHER_ID)).willThrow(NoSuchElementException.class);
 
             //when, then
             assertThrows(NoSuchElementException.class,
-                () -> userService.findUserById(ANOTHER_ID));
+                () -> userService.findUserById(TEST_ANOTHER_ID));
         }
     }
 }

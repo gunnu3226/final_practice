@@ -34,7 +34,7 @@ public class StoreServiceImpl implements StoreService {
 
         return page.map(s -> new StoreResponse(s.getId(), s.getName(), s.getIntroduce(),
             s.getFoods().stream()
-                .map(food -> new FoodResponse(food)).collect(Collectors.toList())));
+                .map(FoodResponse::new).collect(Collectors.toList())));
     }
 
     @Override

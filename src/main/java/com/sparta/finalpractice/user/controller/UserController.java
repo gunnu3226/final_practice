@@ -28,9 +28,7 @@ public class UserController {
     ) {
         UserResponseDto responseDto = userService.signup(requestDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(
-            new CommonResponse(requestDto)
+            new CommonResponse<>(responseDto)
         );
     }
-
-
 }

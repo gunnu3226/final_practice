@@ -7,4 +7,5 @@ import org.springframework.data.repository.RepositoryDefinition;
 @RepositoryDefinition(domainClass = Store.class, idClass = Long.class)
 public interface StoreRepository extends JpaRepository<Store, Long>, StoreRepositoryQuery {
 
+
 }

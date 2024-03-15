@@ -39,6 +39,6 @@ public interface StoreLikeService {
     @Transactional
     public void saveStoreLikeDB(User user, Long storeId);
 
-    @Transactional
-    public void storeLikeRedis(User user, Long storeId);
+//    @Transactional
+//    public void storeLikeRedis(User user, Long storeId);
 }

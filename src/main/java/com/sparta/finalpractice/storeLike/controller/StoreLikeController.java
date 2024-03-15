@@ -21,17 +21,17 @@ public class StoreLikeController {
 
     private final StoreLikeService storeLikeService;
 
-    @PostMapping
-    @Secured("ROLE_USER")
-    public ResponseEntity<CommonResponse<StoreLikeResponse>> doStoreLike(
-        @PathVariable("storeId") Long storeId,
-        @AuthenticationPrincipal UserDetailsImpl userDetails
-    ) {
-        storeLikeService.storeLikeRedis(
-            userDetails.getUser(), storeId);
-        return ResponseEntity.status(HttpStatus.OK).body(
-            new CommonResponse<>());
-    }
+//    @PostMapping
+//    @Secured("ROLE_USER")
+//    public ResponseEntity<CommonResponse<StoreLikeResponse>> doStoreLike(
+//        @PathVariable("storeId") Long storeId,
+//        @AuthenticationPrincipal UserDetailsImpl userDetails
+//    ) {
+//        storeLikeService.storeLikeRedis(
+//            userDetails.getUser(), storeId);
+//        return ResponseEntity.status(HttpStatus.OK).body(
+//            new CommonResponse<>());
+//    }
 
 //    @DeleteMapping
 //    @Secured("ROLE_USER")

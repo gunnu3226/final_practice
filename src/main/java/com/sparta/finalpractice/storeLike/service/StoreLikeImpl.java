@@ -17,7 +17,7 @@ public class StoreLikeImpl implements StoreLikeService{
 
     private final StoreLikeRepository storeLikeRepository;
     private final StoreService storeService;
-    private final RedisTemplate<String, Map<String, Boolean>> redisTemplate;
+//    private final RedisTemplate<String, Map<String, Boolean>> redisTemplate;
 
     private final String REDIS_KEY = "StoreLike";
 
@@ -47,18 +47,18 @@ public class StoreLikeImpl implements StoreLikeService{
         storeLikeRepository.save(new StoreLike(user, store));
     }
 
-    @Override
-    public void storeLikeRedis(User user, Long storeId) {
-        String hashKey = generateHashKey(user.getId(), storeId);
-
-        if(redisTemplate.opsForHash().hasKey(REDIS_KEY, hashKey)) {
-            Boolean like = (Boolean) redisTemplate.opsForHash().get(REDIS_KEY, hashKey);
-            redisTemplate.opsForHash().put(REDIS_KEY, hashKey, !like);
-            return;
-        }
-        saveStoreLikeDB(user, storeId);
-        redisTemplate.opsForHash().put(REDIS_KEY, hashKey, true);
-    }
+//    @Override
+//    public void storeLikeRedis(User user, Long storeId) {
+//        String hashKey = generateHashKey(user.getId(), storeId);
+//
+//        if(redisTemplate.opsForHash().hasKey(REDIS_KEY, hashKey)) {
+//            Boolean like = (Boolean) redisTemplate.opsForHash().get(REDIS_KEY, hashKey);
+//            redisTemplate.opsForHash().put(REDIS_KEY, hashKey, !like);
+//            return;
+//        }
+//        saveStoreLikeDB(user, storeId);
+//        redisTemplate.opsForHash().put(REDIS_KEY, hashKey, true);
+//    }
 
     private String generateHashKey(Long userId, Long storeId) {
         return userId + "::" + storeId;

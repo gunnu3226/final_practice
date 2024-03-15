@@ -21,6 +21,7 @@
 
 #### 3일차. QueryDSL 을 사용하여 검색 기능 만들기
 - QueryDSL 의 jpaQueryFactory 를 사용해서 검색기능을 만들어주세요!
+- Elastic Search를 사용하여 검색기능 만들어보기(진행중..)
 
 
 #### ~~4일차. Pageable 을 사용하여 페이징 및 정렬 기능 만들기~~ ✅
@@ -50,16 +51,17 @@
       ```
   - ~~JpaRepository~~
     - https://github.com/gunnu3226/final_practice/blob/main/src/main/java/com/sparta/finalpractice/store/service/StoreServiceImpl.java
-#### 5일차. Controller 테스트 코드 작성하기
+#### ~~5일차. Controller 테스트 코드 작성하기~~
 - MockMvc 를 사용해서 Controller 테스트 코드를 작성해주세요!
 
-#### 6일차. Service 테스트 코드 작성하기
+#### ~~6일차. Service 테스트 코드 작성하기~~
 - Mockito 을 사용하여 Service 테스트 코드를 작성해주세요!
 
 #### 7일차. Repository 테스트 코드 작성하기
 - @DataJpaTest 를 사용해서 Repository 테스트 코드를 작성해주세요!
 
-#### 8일차. AWS EC2 를 이용해 애플리케이션 .jar 파일 배포하기
+#### ~~8일차. AWS EC2 를 이용해 애플리케이션 .jar 파일 배포하기~~
+- Github action, Docker, Ec2, RDS를 사용하여 CI/CD 구축
 
 
 ### 개선한 점

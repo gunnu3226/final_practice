@@ -21,11 +21,11 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: '17'
-          distribution: 'temurin' 
+          distribution: 'temurin'
 
       # create application-dev.properties
       - name: make application.properties
-        if: contains(github.ref, 'develop')
+        if: contains(github.ref, 'main')
         run: |
           mkdir ./src/main/resources
           cd ./src/main/resources
